@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronoun Quiz</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .quiz-container { max-width: 400px; margin: auto; padding: 20px; background: #f1f1f1; border-radius: 10px; }
+        .btn { cursor: pointer; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <p id="question"></p>
+        <button class="btn" onclick="checkAnswer(0)"></button>
+        <button class="btn" onclick="checkAnswer(1)"></button>
+        <button class="btn" onclick="checkAnswer(2)"></button>
+        <p id="result"></p>
+    </div>
+    <script>
+        const questions = [
+            { question: "Which type of pronoun is 'They'?", options: ["Subjective", "Possessive", "Reflexive"], answer: 0 },
+            { question: "Which type of pronoun is 'Mine'?", options: ["Demonstrative", "Possessive", "Relative"], answer: 1 },
+            { question: "Which type of pronoun is 'This'?", options: ["Demonstrative", "Interrogative", "Indefinite"], answer: 0 },
+            { question: "Which type of pronoun is 'Who'?", options: ["Interrogative", "Reflexive", "Possessive"], answer: 0 },
+            { question: "Which type of pronoun is 'Myself'?", options: ["Reflexive", "Indefinite", "Subjective"], answer: 0 }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            document.getElementById("question").innerText = questions[currentQuestion].question;
+            let buttons = document.querySelectorAll(".btn");
+            questions[currentQuestion].options.forEach((option, index) => {
+                buttons[index].innerText = option;
+            });
+            document.getElementById("result").innerText = "";
+        }
+
+        function checkAnswer(selected) {
+            let correct = questions[currentQuestion].answer;
+            document.getElementById("result").innerText = selected === correct ? "✅ Correct!" : "❌ Try Again.";
+            if (selected === correct) {
+                setTimeout(() => {
+                    currentQuestion = (currentQuestion + 1) % questions.length;
+                    loadQuestion();
+                }, 1000);
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
