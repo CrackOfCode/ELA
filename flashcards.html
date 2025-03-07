@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronoun Flashcards</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .card { width: 300px; height: 200px; margin: auto; padding: 20px; background: #f1f1f1; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; }
+        .btn { margin-top: 10px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Pronoun Flashcards</h1>
+    <div class="card" onclick="flipCard()">
+        <p id="flashcard">Click to Flip</p>
+    </div>
+    <button class="btn" onclick="nextCard()">Next Card</button>
+
+    <script>
+        const flashcards = [
+            { front: "They", back: "Subjective Pronoun" },
+            { front: "Him", back: "Objective Pronoun" },
+            { front: "Yours", back: "Possessive Pronoun" },
+            { front: "Myself", back: "Reflexive Pronoun" },
+            { front: "This", back: "Demonstrative Pronoun" },
+            { front: "Who", back: "Interrogative Pronoun" },
+            { front: "Which", back: "Relative Pronoun" },
+            { front: "Anyone", back: "Indefinite Pronoun" },
+            { front: "Each other", back: "Reciprocal Pronoun" },
+            { front: "Itself", back: "Intensive Pronoun" }
+        ];
+
+        let currentIndex = 0;
+        let flipped = false;
+
+        function flipCard() {
+            let card = document.getElementById("flashcard");
+            card.innerText = flipped ? flashcards[currentIndex].front : flashcards[currentIndex].back;
+            flipped = !flipped;
+        }
+
+        function nextCard() {
+            flipped = false;
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            document.getElementById("flashcard").innerText = flashcards[currentIndex].front;
+        }
+    </script>
+</body>
+</html>
