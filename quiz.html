@@ -21,29 +21,30 @@
         <a href="index.html" class="home-btn">🏠 Home</a>
     </div>
     <script>
-       const questions = [
-    { question: "Which type of pronoun is 'They'?", options: ["Subjective", "Possessive", "Reflexive"], answer: 0 },
-    { question: "Which type of pronoun is 'Mine'?", options: ["Demonstrative", "Possessive", "Relative"], answer: 1 },
-    { question: "Which type of pronoun is 'This'?", options: ["Demonstrative", "Interrogative", "Indefinite"], answer: 0 },
-    { question: "Which type of pronoun is 'Who'?", options: ["Interrogative", "Reflexive", "Possessive"], answer: 0 },
-    { question: "Which type of pronoun is 'Myself'?", options: ["Reflexive", "Indefinite", "Subjective"], answer: 0 },
-    { question: "Which type of pronoun is 'Him'?", options: ["Objective", "Subjective", "Possessive"], answer: 0 },
-    { question: "Which type of pronoun is 'Anyone'?", options: ["Indefinite", "Interrogative", "Demonstrative"], answer: 0 },
-    { question: "Which type of pronoun is 'It'?", options: ["Subjective", "Objective", "Reflexive"], answer: 1 },
-    { question: "Which type of pronoun is 'Themselves'?", options: ["Intensive", "Reciprocal", "Reflexive"], answer: 2 },
-    { question: "Which type of pronoun is 'That'?", options: ["Relative", "Interrogative", "Demonstrative"], answer: 0 },
-    { question: "Which type of pronoun is 'Her'?", options: ["Objective", "Subjective", "Possessive"], answer: 0 },
-    { question: "Which type of pronoun is 'These'?", options: ["Demonstrative", "Interrogative", "Indefinite"], answer: 0 },
-    { question: "Which type of pronoun is 'Whose'?", options: ["Relative", "Indefinite", "Interrogative"], answer: 0 },
-    { question: "Which type of pronoun is 'Each other'?", options: ["Reciprocal", "Intensive", "Relative"], answer: 0 },
-    { question: "Which type of pronoun is 'We'?", options: ["Subjective", "Possessive", "Reflexive"], answer: 0 },
-    { question: "Which type of pronoun is 'Whom'?", options: ["Interrogative", "Relative", "Objective"], answer: 0 },
-    { question: "Which type of pronoun is 'Ourselves'?", options: ["Reciprocal", "Intensive", "Reflexive"], answer: 2 },
-    { question: "Which type of pronoun is 'Which'?", options: ["Relative", "Indefinite", "Interrogative"], answer: 0 },
-    { question: "Which type of pronoun is 'Yourself'?", options: ["Reflexive", "Possessive", "Intensive"], answer: 0 },
-    { question: "Which type of pronoun is 'Themselves'?", options: ["Intensive", "Reflexive", "Demonstrative"], answer: 1 },
-    { question: "Which type of pronoun is 'That'?", options: ["Relative", "Demonstrative", "Interrogative"], answer: 0 }
-];
+        const questions = [
+            { question: "Which type of pronoun is 'They'?", options: ["Subjective", "Possessive", "Reflexive"], answer: 0 },
+            { question: "Which type of pronoun is 'Mine'?", options: ["Demonstrative", "Possessive", "Relative"], answer: 1 },
+            { question: "Which type of pronoun is 'This'?", options: ["Demonstrative", "Interrogative", "Indefinite"], answer: 0 },
+            { question: "Which type of pronoun is 'Who'?", options: ["Interrogative", "Reflexive", "Possessive"], answer: 0 },
+            { question: "Which type of pronoun is 'Myself'?", options: ["Reflexive", "Indefinite", "Subjective"], answer: 0 },
+            { question: "Which type of pronoun is 'Him'?", options: ["Objective", "Subjective", "Possessive"], answer: 0 },
+            { question: "Which type of pronoun is 'Anyone'?", options: ["Indefinite", "Interrogative", "Demonstrative"], answer: 0 },
+            { question: "Which type of pronoun is 'It'?", options: ["Subjective", "Objective", "Reflexive"], answer: 1 },
+            { question: "Which type of pronoun is 'Themselves'?", options: ["Intensive", "Reciprocal", "Reflexive"], answer: 2 },
+            { question: "Which type of pronoun is 'That'?", options: ["Relative", "Interrogative", "Demonstrative"], answer: 0 },
+            { question: "Which type of pronoun is 'Her'?", options: ["Objective", "Subjective", "Possessive"], answer: 0 },
+            { question: "Which type of pronoun is 'These'?", options: ["Demonstrative", "Interrogative", "Indefinite"], answer: 0 },
+            { question: "Which type of pronoun is 'Whose'?", options: ["Relative", "Indefinite", "Interrogative"], answer: 0 },
+            { question: "Which type of pronoun is 'Each other'?", options: ["Reciprocal", "Intensive", "Relative"], answer: 0 },
+            { question: "Which type of pronoun is 'We'?", options: ["Subjective", "Possessive", "Reflexive"], answer: 0 },
+            { question: "Which type of pronoun is 'Whom'?", options: ["Interrogative", "Relative", "Objective"], answer: 0 },
+            { question: "Which type of pronoun is 'Ourselves'?", options: ["Reciprocal", "Intensive", "Reflexive"], answer: 2 },
+            { question: "Which type of pronoun is 'Which'?", options: ["Relative", "Indefinite", "Interrogative"], answer: 0 },
+            { question: "Which type of pronoun is 'Yourself'?", options: ["Reflexive", "Possessive", "Intensive"], answer: 0 },
+            { question: "Which type of pronoun is 'Themselves'?", options: ["Intensive", "Reflexive", "Demonstrative"], answer: 1 },
+            { question: "Which type of pronoun is 'That'?", options: ["Relative", "Demonstrative", "Interrogative"], answer: 0 }
+        ];
+
         let currentQuestion = 0;
 
         function loadQuestion() {
@@ -56,7 +57,16 @@
         }
 
         function checkAnswer(selected) {
-            document.getElementById("result").innerText = selected === questions[currentQuestion].answer ? "✅ Correct!" : "❌ Try Again.";
+            let correct = questions[currentQuestion].answer;
+            document.getElementById("result").innerText = selected === correct ? "✅ Correct!" : "❌ Try Again.";
+
+            // If the answer is correct, move to the next question after 1 second
+            if (selected === correct) {
+                setTimeout(() => {
+                    currentQuestion = (currentQuestion + 1) % questions.length; // Loops back after last question
+                    loadQuestion();
+                }, 1000);
+            }
         }
 
         loadQuestion();
