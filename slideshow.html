@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronoun Slideshow</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .slide-container { max-width: 600px; margin: auto; position: relative; }
+        .slide { display: none; padding: 20px; background: #f1f1f1; border-radius: 10px; }
+        .active { display: block; }
+        .slide img { width: 100%; max-height: 300px; border-radius: 10px; }
+        .nav-btn { cursor: pointer; padding: 10px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Pronoun Slideshow</h1>
+    <div class="slide-container">
+        <div class="slide active">
+            <img src="https://via.placeholder.com/500x300/007bff/ffffff?text=Subjective+Pronouns" alt="Subjective Pronouns">
+            <p>Subjective pronouns act as the subject of a sentence. Examples: I, You, He, She, They.</p>
+        </div>
+        <div class="slide">
+            <img src="https://via.placeholder.com/500x300/ff5733/ffffff?text=Objective+Pronouns" alt="Objective Pronouns">
+            <p>Objective pronouns act as the object of a sentence. Examples: Me, You, Him, Her, Them.</p>
+        </div>
+        <div class="slide">
+            <img src="https://via.placeholder.com/500x300/33ff57/ffffff?text=Possessive+Pronouns" alt="Possessive Pronouns">
+            <p>Possessive pronouns show ownership. Examples: Mine, Yours, His, Hers, Theirs.</p>
+        </div>
+        <div class="slide">
+            <img src="https://via.placeholder.com/500x300/ff33a8/ffffff?text=Reflexive+Pronouns" alt="Reflexive Pronouns">
+            <p>Reflexive pronouns reflect back on the subject. Examples: Myself, Yourself, Himself, Herself.</p>
+        </div>
+        <div class="slide">
+            <img src="https://via.placeholder.com/500x300/ffdb33/000000?text=Demonstrative+Pronouns" alt="Demonstrative Pronouns">
+            <p>Demonstrative pronouns point to something specific. Examples: This, That, These, Those.</p>
+        </div>
+    </div>
+    <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
+    <button class="nav-btn" onclick="changeSlide(1)">Next</button>
+
+    <script>
+        let currentIndex = 0;
+        function changeSlide(n) {
+            let slides = document.querySelectorAll(".slide");
+            slides[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + n + slides.length) % slides.length;
+            slides[currentIndex].classList.add("active");
+        }
+    </script>
+</body>
+</html>
